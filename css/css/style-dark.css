@@ -5,14 +5,14 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1B1E23;
-    color: #E1E6EA;
+    background-color: #121212;
+    color: #E0E0E0;
 }
 
 /* En-tête */
 header {
-    background: linear-gradient(90deg, #2E3033, #4A4D50);
-    color: #E1E6EA;
+    background: linear-gradient(90deg, #181818, #282828);
+    color: #E0E0E0;
     text-align: center;
     padding: 20px;
     font-size: 24px;
@@ -23,7 +23,7 @@ header {
     font-size: 5vw;
     font-weight: bold;
     text-transform: uppercase;
-    color: #E1E6EA;
+    color: #E0E0E0;
 }
 
 /* Navigation */
@@ -34,7 +34,7 @@ nav ul {
     justify-content: center;
     flex-wrap: wrap;
     margin: 0;
-    background-color: #2E3033;
+    background-color: #181818;
 }
 
 nav ul li {
@@ -42,17 +42,17 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #E1E6EA;
+    color: #E0E0E0;
     text-decoration: none;
     font-weight: 600;
     padding: 10px 15px;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 nav ul li a.active,
 nav ul li a:hover {
-    background-color: #4A4D50;
-    color: #E1E6EA;
+    background-color: #333333;
+    color: #FFFFFF;
     border-radius: 5px;
 }
 
@@ -66,32 +66,32 @@ nav ul li a:hover {
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 30px;
     text-align: center;
-    color: #E1E6EA;
+    color: #E0E0E0;
     border-radius: 10px;
 }
 
 /* Boutons */
 .btn {
-    background-color: #4A4D50;
-    color: #E1E6EA;
-    padding: 10}px 20px;
+    background-color: #333333;
+    color: #E0E0E0;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .btn:hover {
-    background-color: #70A288;
-    color: #1B3A4B;
+    background-color: #444444;
+    color: #FFFFFF;
 }
 
 /* Pied de page */
 footer {
-    background-color: #2E3033;
-    color: #E1E6EA;
+    background-color: #181818;
+    color: #E0E0E0;
     text-align: center;
     padding: 15px;
     font-size: 14px;
