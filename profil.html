@@ -1,64 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>O’Bitoun Travel - Profil</title>
+
+  <!-- Thème dynamique -->
   <link rel="stylesheet" id="theme-css" href="css/style-light.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    .profile-section {
-      background: url('https://www.1jour1actu.com/wp-content/uploads/2022/10/1J1A_Bresil_AdobeStock_75582352.jpg') no-repeat center center/cover;
-      padding: 50px;
-      text-align: center;
-    }
-    .profile-container {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px;
-      border-radius: 10px;
-      display: inline-block;
-      text-align: left;
-    }
-    .edit-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2em;
-      color: #1B3A4B;
-    }
-    .edit-btn:hover {
-      color: #70A288;
-    }
-    .profile-container input {
-      border: 1px solid #ccc;
-      padding: 5px;
-      border-radius: 5px;
-      width: 100%;
-      margin-top: 5px;
-    }
-    .btn-deconnexion {
-      background-color: #D9534F;
-      color: white;
-      padding: 8px 15px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      display: inline-block;
-    }
-  </style>
-  <script>
-    function enableEdit(id) {
-      document.getElementById(id).removeAttribute('readonly');
-      document.getElementById(id).focus();
-    }
-  </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
   <header>
-    <div class="header-container">
-      <h1 class="main-title">O’Bitoun Travel</h1>
-    </div>
+    <h1 class="main-title">Mon Profil</h1>
     <nav>
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -71,38 +27,106 @@
       </ul>
     </nav>
   </header>
+
   <main>
-    <section class="profile-section">
-      <h2>Mon Profil</h2>
-      <div class="profile-container">
-        <!-- Exemples de valeurs (ces champs pourront être pré-remplis dynamiquement via PHP lors de la connexion) -->
-        <label for="nom"><strong>Nom :</strong></label>
-        <input type="text" id="nom" readonly value="ExempleNom">
-        <button class="edit-btn" onclick="enableEdit('nom')"><i class="fas fa-pencil-alt"></i></button>
-        
-        <label for="email"><strong>Email :</strong></label>
-        <input type="email" id="email" readonly value="exemple@email">
-        <button class="edit-btn" onclick="enableEdit('email')"><i class="fas fa-pencil-alt"></i></button>
-        
-        <label for="password"><strong>Mot de passe :</strong></label>
-        <input type="password" id="password" readonly value="********">
-        <button class="edit-btn" onclick="enableEdit('password')"><i class="fas fa-pencil-alt"></i></button>
-        
-        <label for="adresse"><strong>Adresse :</strong></label>
-        <input type="text" id="adresse" readonly value="123 Rue Exemple">
-        <button class="edit-btn" onclick="enableEdit('adresse')"><i class="fas fa-pencil-alt"></i></button>
-        
-        <br><br>
-        <button class="btn">Enregistrer les modifications</button>
-        <br><br>
-        <!-- Lien de déconnexion -->
-        <a href="../php/scripts/deconnexion.php" class="btn-deconnexion">Se déconnecter</a>
-      </div>
-    </section>
+    <div class="profile-container">
+      <form action="profil.php" method="POST">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" readonly value="<?= $user->username ?>" />
+        <button type="button" class="edit-btn">✏️</button>
+
+        <!-- Ajoutez d'autres champs de profil ici de la même manière -->
+
+        <button type="submit" class="btn" disabled>Enregistrer les modifications</button>
+      </form>
+    </div>
   </main>
+
   <footer>
     <p>&copy; 2025 O’Bitoun Travel - Tous droits réservés</p>
   </footer>
+
+  <!-- Phase 3 Scripts -->
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/form-validation.js"></script>
+  <script src="js/profile-inline-edit.js"></script>
+  <script src="js/admin-simulate.js"></script>
+  <script src="js/search-sort.js"></script>
+  <script src="js/dynamic-pricing.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
+```
+
+---
+
+### recherche.html
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rechercher un voyage - O’Bitoun Travel</title>
+
+  <!-- Thème dynamique -->
+  <link rel="stylesheet" id="theme-css" href="css/style-light.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <h1 class="main-title">Rechercher un voyage</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="recherche.html" class="active">Rechercher un voyage</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+        <li><a href="connexion.html">Connexion</a></li>
+        <li><a href="profil.html">Profil</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" style="background: url('https://upload.wikimedia.org/wikipedia/commons/5/57/Basilica_of_Our_Lady_of_the_Pillar_and_the_Ebro_River%2C_Zaragoza.jpg') no-repeat center/cover;">
+      <div class="overlay">
+        <h2>Choisissez vos filtres</h2>
+        <form id="filter-form" class="filter-form">
+          <label for="destination">Destination :</label>
+          <input type="text" id="destination" name="destination" placeholder="Ex. Paris" />
+
+          <label for="sort-by">Trier par :</label>
+          <select id="sort-by" name="sort">
+            <option value="price">Prix</option>
+            <option value="date">Date</option>
+          </select>
+
+          <button type="button" class="btn" id="apply-sort">Appliquer</button>
+        </form>
+      </div>
+    </section>
+
+    <ul class="results-list">
+      <!-- Exemple de résultat -->
+      <li class="result" data-price="200" data-date="2025-06-01">
+        <h3>Voyage Exemple</h3>
+        <p>Prix : 200€</p>
+        <p>Date : 01/06/2025</p>
+        <button class="add-to-cart btn" data-trip-id="123">Ajouter au panier</button>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 O’Bitoun Travel - Tous droits réservés</p>
+  </footer>
+
+  <!-- Phase 3 Scripts -->
   <script src="js/theme-toggle.js"></script>
   <script src="js/form-validation.js"></script>
   <script src="js/profile-inline-edit.js"></script>
