@@ -1,40 +1,45 @@
 // js/theme-toggle.js
-(function(){
-  const THEME_COOKIE = 'theme';
-  const btn = document.createElement('button');
-  btn.id = 'toggle-theme';
-  btn.textContent = '🌓';
-  btn.style.position = 'fixed';
-  btn.style.bottom = '10px';
-  btn.style.right = '10px';
-  document.body.appendChild(btn);
+;(function(){
+  const LINK_ID = 'theme-css'
+  const LIGHT = 'css/style-light.css'
+  const DARK  = 'css/style-dark.css'
+  const STORAGE_KEY = 'theme'
 
-  function setTheme(name) {
-    let link = document.getElementById('theme-css');
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.id = 'theme-css';
-      document.head.appendChild(link);
-    }
-    link.href = `css/style-${name}.css`;
-    document.cookie = `${THEME_COOKIE}=${name};path=/;max-age=31536000`;
+  // récupère le <link> existant
+  const link = document.getElementById(LINK_ID)
+  if (!link) return console.error('Impossible de trouver #theme-css')
+
+  // crée/ajoute le bouton de toggle
+  const btn = document.createElement('button')
+  btn.id = 'toggle-theme'
+  btn.style.cssText = `
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: .5rem;
+    font-size: 1.2rem;
+    border: none;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  `
+  document.body.appendChild(btn)
+
+  // fonction pour appliquer un thème
+  function apply(theme) {
+    link.href = (theme === 'dark') ? DARK : LIGHT
+    btn.textContent = (theme === 'dark') ? '☀️' : '🌙'
+    localStorage.setItem(STORAGE_KEY, theme)
   }
 
-  function getCookie(name) {
-    return document.cookie.split('; ').reduce((r,v)=> {
-      const parts = v.split('=');
-      return parts[0] === name ? decodeURIComponent(parts[1]) : r
-    }, '');
-  }
+  // init au chargement
+  const saved = localStorage.getItem(STORAGE_KEY) 
+  apply(saved === 'dark' ? 'dark' : 'light')
 
-  // Init
-  const saved = getCookie(THEME_COOKIE) || 'light';
-  setTheme(saved);
-
-  // Toggle
-  btn.addEventListener('click', ()=> {
-    const next = (getCookie(THEME_COOKIE) === 'light') ? 'dark' : 'light';
-    setTheme(next);
-  });
-})();
+  // click → toggle
+  btn.addEventListener('click', () => {
+    const next = link.getAttribute('href') === LIGHT ? 'dark' : 'light'
+    apply(next)
+  })
+})()
