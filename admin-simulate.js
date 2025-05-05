@@ -1,34 +1,32 @@
-// js/admin-simulate.js
-document.addEventListener('DOMContentLoaded', ()=> {
-  const tbody = document.getElementById('user-table-body');
-  if (!tbody) return;
+document.addEventListener('DOMContentLoaded',()=>{
+  const body=document.getElementById('user-table-body');
+  if(!body) return;
 
-  // Exemple de chargement AJAX simulé
-  fetch('api/get-users.php')
-    .then(r=>r.json())
-    .then(users => {
-      users.forEach(u=>{
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${u.id}</td>
-          <td>${u.username}</td>
-          <td>${u.email}</td>
-          <td><input type="checkbox" ${u.active?'checked':''}></td>
-          <td><button data-id="${u.id}">Appliquer</button></td>
-        `;
-        tbody.appendChild(tr);
-      });
+  // simulation d'une source
+  const users=[
+    {id:1, name:'Alice', email:'alice@mail.com', active:true},
+    {id:2, name:'Bob',   email:'bob@mail.com',   active:false}
+  ];
+  users.forEach(u=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${u.id}</td>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td><input type="checkbox" ${u.active?'checked':''}></td>
+      <td><button data-id="${u.id}">Appliquer</button></td>
+    `;
+    body.appendChild(tr);
+  });
 
-      tbody.querySelectorAll('button').forEach(btn=>{
-        btn.addEventListener('click', ()=> {
-          const chk = btn.parentElement.previousElementSibling.querySelector('input');
-          btn.disabled = true; chk.disabled = true;
-          setTimeout(()=> {
-            // simuler appel serveur
-            fetch(`api/set-active.php?id=${btn.dataset.id}&active=${chk.checked}`);
-            btn.disabled = false; chk.disabled = false;
-          }, 3000);
-        });
-      });
+  body.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const chk=btn.parentElement.previousElementSibling.querySelector('input');
+      btn.disabled=true; chk.disabled=true;
+      setTimeout(()=>{
+        // ici : fetch vers serveur
+        btn.disabled=false; chk.disabled=false;
+      },3000);
     });
+  });
 });
