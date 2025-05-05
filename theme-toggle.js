@@ -1,45 +1,36 @@
-// js/theme-toggle.js
+// bascule clair/sombre via localStorage
 ;(function(){
-  const LINK_ID = 'theme-css'
-  const LIGHT = 'css/style-light.css'
-  const DARK  = 'css/style-dark.css'
-  const STORAGE_KEY = 'theme'
+  const LINK_ID = 'theme-css';
+  const LIGHT = 'css/style-light.css';
+  const DARK  = 'css/style-dark.css';
+  const KEY   = 'theme';
 
-  // récupère le <link> existant
-  const link = document.getElementById(LINK_ID)
-  if (!link) return console.error('Impossible de trouver #theme-css')
+  const link = document.getElementById(LINK_ID);
+  if(!link) return;
 
-  // crée/ajoute le bouton de toggle
-  const btn = document.createElement('button')
-  btn.id = 'toggle-theme'
+  // bouton toggle
+  const btn = document.createElement('button');
+  btn.id = 'toggle-theme';
   btn.style.cssText = `
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    padding: .5rem;
-    font-size: 1.2rem;
-    border: none;
-    background: rgba(0,0,0,0.3);
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  `
-  document.body.appendChild(btn)
+    position:fixed; bottom:1rem; right:1rem;
+    padding:.5rem; font-size:1.2rem;
+    background:rgba(0,0,0,0.3); color:#fff;
+    border:none; border-radius:4px; cursor:pointer;
+  `;
+  document.body.appendChild(btn);
 
-  // fonction pour appliquer un thème
-  function apply(theme) {
-    link.href = (theme === 'dark') ? DARK : LIGHT
-    btn.textContent = (theme === 'dark') ? '☀️' : '🌙'
-    localStorage.setItem(STORAGE_KEY, theme)
+  function setTheme(t){
+    link.href = t==='dark'? DARK: LIGHT;
+    btn.textContent = t==='dark'? '☀️':'🌙';
+    localStorage.setItem(KEY,t);
   }
 
-  // init au chargement
-  const saved = localStorage.getItem(STORAGE_KEY) 
-  apply(saved === 'dark' ? 'dark' : 'light')
+  // appli initiale
+  const saved = localStorage.getItem(KEY);
+  setTheme(saved==='dark'?'dark':'light');
 
-  // click → toggle
-  btn.addEventListener('click', () => {
-    const next = link.getAttribute('href') === LIGHT ? 'dark' : 'light'
-    apply(next)
-  })
-})()
+  btn.addEventListener('click',()=>{
+    const curr = link.getAttribute('href')===LIGHT?'dark':'light';
+    setTheme(curr);
+  });
+})();
